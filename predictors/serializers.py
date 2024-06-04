@@ -21,7 +21,7 @@ class PestSerializer(serializers.ModelSerializer):
         pest_info = representation.get('pestInfo')
 
         if isinstance(pest_info, str):
-            representation['pestInfo'] = pest_info.split(',')
+            representation['pestInfo'] = pest_info.split('/')
         else:
             representation['pestInfo'] = []
 

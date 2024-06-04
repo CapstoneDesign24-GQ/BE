@@ -106,7 +106,7 @@ def calculate_risk_level(percentage):
 def get_main_info(request):
     try:
         # 가장 최근에 저장된 사용자 선택 정보 가져오기
-        latest_user_select = UserSelect.objects.latest('selectedDate')
+        latest_user_select = UserSelect.objects.latest('userSelectId')
 
         # 선택된 작물, 지역, 날짜
         selected_crop = latest_user_select.selectedCrop
@@ -192,7 +192,7 @@ def fetch_weather_data(url, params, retries=40, delay=1):
 @api_view(['GET'])
 def get_weather_data(request):
     # 오늘 날짜 및 시간으로 설정
-    latest_user_select = UserSelect.objects.latest('selectedDate')
+    latest_user_select = UserSelect.objects.latest('userSelectId')
     selected_date = latest_user_select.selectedDate
 
     # 날짜 형식 변환
