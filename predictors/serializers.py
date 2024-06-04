@@ -16,6 +16,17 @@ class PestSerializer(serializers.ModelSerializer):
         model = Pest
         fields = '__all__'
 
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        pest_info = representation.get('pestInfo')
+
+        if isinstance(pest_info, str):
+            representation['pestInfo'] = pest_info.split(',')
+        else:
+            representation['pestInfo'] = []
+
+        return representation
+
 class RiskForecastSerializer(serializers.ModelSerializer):
     pestName = serializers.SerializerMethodField()
 

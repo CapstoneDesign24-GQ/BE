@@ -15,25 +15,8 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# 시크릿 키 불러오기
-import json 
-from pathlib import Path
-import os
-from pathlib import Path
-from django.core.exceptions import ImproperlyConfigured
+SECRET_KEY = "django-insecure-bqc8+7v5vfe75jf%#_1sh((#!8cyd6qqx*v_(*u^2r=ts03-s2"
 
-secret_file = os.path.join(BASE_DIR, 'secrets.json')
-
-with open(secret_file) as f:
-    secrets = json.loads(f.read())
-
-
-def get_secret(setting, secrets=secrets):
-    try:
-        return secrets[setting]
-    except KeyError:
-        error_msg = "Set the {} environment variable".format(setting)
-        raise ImproperlyConfigured(error_msg)
     
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -136,7 +119,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+#  https://yanghyen@github.com/CapstoneDesign24-GQ/BE.git
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
@@ -160,7 +143,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-'''
+
 ##CORS
 # CORS_ORIGIN_WHITELIST = []
 CORS_ORIGIN_ALLOW_ALL=True
@@ -184,7 +167,16 @@ CORS_ALLOW_HEADERS = (
     'x-csrftoken',
     'x-requested-with',
     #만약 허용해야할 추가적인 헤더키가 있다면(사용자정의 키) 여기에 추가하면 됩니다.
+    
 )
-
-CSRF_TRUSTED_ORIGINS = ['배포주소']
+# 허용할 프론트엔드의 도메인
+'''CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    'http://api.GQ.klr.kr',  
+]
+CSRF_TRUSTED_ORIGINS = [
+    'http://api.GQ.klr.kr',
+    "http://localhost:3000",
+]
 '''
+# 같은 와이파이 쓸 때 실시간 데이터 확인 ifconfig -> en0 -> inet x.x.x.x

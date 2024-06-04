@@ -50,7 +50,7 @@ class UpdateSelectedLocationView(APIView):
             selected_location = data.get('selectedLocation')
 
             if selected_location:
-                user_select = UserSelect.objects.first()
+                user_select = UserSelect.objects.latest('userSelectId')
 
                 if user_select:
                     user_select.selectedLocation = selected_location
@@ -80,7 +80,7 @@ class UpdateSelectedCropView(APIView):
             selected_crop = data.get('selectedCrop')
 
             if selected_crop:
-                user_select = UserSelect.objects.first()
+                user_select = UserSelect.objects.latest('userSelectId')
 
                 if user_select:
                     user_select.selectedCrop = selected_crop
@@ -131,14 +131,17 @@ class PestInfoAPIView(APIView):
             if pest_pesticides.exists():
                 matching_pesticides.append(pesticide)
 
+        pest_info = pest_serializer.data
+        management = [management_serializer.data]
+
         pesticide_info = []
         for pesticide in matching_pesticides:
             serializer = PesticideSerializer(pesticide)
             pesticide_info.append(serializer.data)
 
         response_data = {
-            'pest': pest_serializer.data,
-            'management': management_serializer.data,
+            'pest': pest_info,
+            'management': management,
             'pesticide_info': pesticide_info
         }
         return Response(response_data, status=status.HTTP_200_OK)

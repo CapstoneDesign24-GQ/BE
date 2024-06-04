@@ -11,7 +11,7 @@ class Pest(models.Model):
     pestId = models.AutoField(primary_key=True)
     pestName = models.CharField(max_length=100)
     pestImage = models.CharField(max_length=100)
-    pestInfo = models.JSONField()
+    pestInfo = models.TextField()
     pestStepImage1 = models.CharField(max_length=100)
     pestStepImage2 = models.CharField(max_length=100, null=True)
     pestStepImage3 = models.CharField(max_length=100, null=True)
@@ -30,6 +30,9 @@ class UserSelect(models.Model):
     selectedCrop = models.CharField(max_length=100, unique=False)
     selectedLocation = models.CharField(max_length=100, unique=False)
     selectedDate = models.DateField()
+
+    class Meta:
+        get_latest_by = 'userSelectId'
 
 class RiskForecast(models.Model):
     riskForecastId = models.AutoField(primary_key=True)
