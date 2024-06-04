@@ -9,13 +9,13 @@ admin.site.register(Crop, CropAdmin)
 
 # Pest 모델에 대한 어드민 클래스
 class PestAdmin(admin.ModelAdmin):
-    list_display = ['pestId', 'pestName', 'pestImage', 'pestInfo', 'pestStepImage1', 'pestStepImage2', 'pestStepImage3']
+    list_display = ['pestId', 'pestName', 'pestImage', 'pestInfo', 'pestStepImage1', 'pestStepImage2', 'pestStepImage3', 'pesticideExcel']
 
 admin.site.register(Pest, PestAdmin)
 
 # Pesticide 모델에 대한 어드민 클래스
 class PesticideAdmin(admin.ModelAdmin):
-    list_display = ['pesticideId', 'pesticideName', 'companyName', 'safeUsagePeriod', 'safeUsageFrequency', 'pesticideExcel']
+    list_display = ['pesticideId', 'pesticideName', 'companyName', 'safeUsagePeriod', 'safeUsageFrequency']
 
 admin.site.register(Pesticide, PesticideAdmin)
 

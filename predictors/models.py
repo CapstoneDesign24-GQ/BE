@@ -15,6 +15,7 @@ class Pest(models.Model):
     pestStepImage1 = models.CharField(max_length=100)
     pestStepImage2 = models.CharField(max_length=100, null=True)
     pestStepImage3 = models.CharField(max_length=100, null=True)
+    pesticideExcel = models.CharField(max_length=100, null=True)
 
 class Pesticide(models.Model):
     pesticideId = models.AutoField(primary_key=True)
@@ -22,7 +23,6 @@ class Pesticide(models.Model):
     companyName = models.CharField(max_length=100)
     safeUsagePeriod = models.CharField(max_length=100)
     safeUsageFrequency = models.CharField(max_length=100)
-    pesticideExcel = models.CharField(max_length=100, null=True)
 
 class UserSelect(models.Model):
     userSelectId = models.AutoField(primary_key=True)

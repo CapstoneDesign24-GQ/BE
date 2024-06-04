@@ -50,4 +50,4 @@ class ManagementSerializer(serializers.ModelSerializer):
 class PesticideSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pesticide
-        fields = ['companyName', 'pesticideName', 'safeUsagePeriod', 'safeUsageFrequency', 'pesticideExcel']
+        fields = ['companyName', 'pesticideName', 'safeUsagePeriod', 'safeUsageFrequency']
