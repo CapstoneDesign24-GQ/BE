@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-bqc8+7v5vfe75jf%#_1sh((#!8cyd6qqx*v_(*u^2r=ts03-s2
 # SECURITY WARNING: don't run with debug turned on in production!
 
 # pythonanywhere 서버 배포하려고 True -> False, ALLOWED_HOSTS 추가
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*', '.pythonanywhere.com']
 
