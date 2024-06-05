@@ -21,8 +21,6 @@ class Pesticide(models.Model):
     pesticideId = models.AutoField(primary_key=True)
     pesticideName = models.CharField(max_length=100)
     companyName = models.CharField(max_length=100)
-    safeUsagePeriod = models.CharField(max_length=100)
-    safeUsageFrequency = models.CharField(max_length=100)
 
 class UserSelect(models.Model):
     userSelectId = models.AutoField(primary_key=True)
@@ -45,6 +43,8 @@ class CropPesticide(models.Model):
     cropPesticideId = models.AutoField(primary_key=True)
     crop = models.ForeignKey(Crop, on_delete=models.CASCADE)
     pesticide = models.ForeignKey(Pesticide, on_delete=models.CASCADE)
+    safeUsagePeriod = models.CharField(max_length=100)
+    safeUsageFrequency = models.CharField(max_length=100)
 
 class PestPesticide(models.Model):
     pestPesticideId = models.AutoField(primary_key=True)

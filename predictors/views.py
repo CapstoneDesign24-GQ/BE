@@ -129,20 +129,24 @@ class PestInfoAPIView(APIView):
             pesticide = crop_pesticide.pesticide
             pest_pesticides = PestPesticide.objects.filter(pest__pestName=pest_name, pesticide=pesticide)
             if pest_pesticides.exists():
-                matching_pesticides.append(pesticide)
+                matching_pesticides.append(crop_pesticide)
 
         pest_info = pest_serializer.data
         management = [management_serializer.data]
 
+        unique_pesticides = set()
         pesticide_info = []
-        for pesticide in matching_pesticides:
-            serializer = PesticideSerializer(pesticide)
-            pesticide_info.append(serializer.data)
-
+        for crop_pesticide in matching_pesticides:
+            pesticide_id = crop_pesticide.pesticide.pesticideId
+            if pesticide_id not in unique_pesticides:
+                serializer1 = PesticideDetailSerializer(crop_pesticide)
+                pesticide_info.append(serializer1.data)
+                unique_pesticides.add(pesticide_id)
+      
         response_data = {
             'pest': pest_info,
             'management': management,
-            'pesticide_info': pesticide_info
+            'pesticide_info': pesticide_info,
         }
         return Response(response_data, status=status.HTTP_200_OK)
     

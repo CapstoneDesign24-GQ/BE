@@ -14,7 +14,7 @@ class CropSerializer(serializers.ModelSerializer):
 class PestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pest
-        fields = '__all__'
+        fields = ['pestName', 'pestImage', 'pestInfo', 'pestStepImage1', 'pestStepImage2', 'pestStepImage3', 'pesticideExcel']
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
@@ -50,4 +50,17 @@ class ManagementSerializer(serializers.ModelSerializer):
 class PesticideSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pesticide
+        fields = ['companyName', 'pesticideName']
+
+class CropPesticideSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CropPesticide
+        fields = ['safeUsagePeriod', 'safeUsageFrequency']
+
+class PesticideDetailSerializer(serializers.ModelSerializer):
+    companyName = serializers.CharField(source='pesticide.companyName')
+    pesticideName = serializers.CharField(source='pesticide.pesticideName')
+
+    class Meta:
+        model = CropPesticide
         fields = ['companyName', 'pesticideName', 'safeUsagePeriod', 'safeUsageFrequency']

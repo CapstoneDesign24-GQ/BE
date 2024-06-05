@@ -15,7 +15,7 @@ admin.site.register(Pest, PestAdmin)
 
 # Pesticide 모델에 대한 어드민 클래스
 class PesticideAdmin(admin.ModelAdmin):
-    list_display = ['pesticideId', 'pesticideName', 'companyName', 'safeUsagePeriod', 'safeUsageFrequency']
+    list_display = ['pesticideId', 'pesticideName', 'companyName']
 
 admin.site.register(Pesticide, PesticideAdmin)
 
@@ -27,7 +27,7 @@ admin.site.register(RiskForecast, RiskForecastAdmin)
 
 # CropPesticide 모델에 대한 어드민 클래스
 class CropPesticideAdmin(admin.ModelAdmin):
-    list_display = ['cropPesticideId', 'crop', 'pesticide']
+    list_display = ['cropPesticideId', 'crop', 'pesticide', 'safeUsagePeriod', 'safeUsageFrequency']
 
 admin.site.register(CropPesticide, CropPesticideAdmin)
 
