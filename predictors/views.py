@@ -102,9 +102,9 @@ class UpdateSelectedCropView(APIView):
             return Response({'error': error_message}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
 # 해충 정보 조회
+@method_decorator(csrf_exempt, name='dispatch')
 class PestInfoAPIView(APIView):
     permission_classes = [AllowAny]
-
     def post(self, request):
         data = request.data
         pest_name = data.get('pestName')
@@ -118,7 +118,6 @@ class PestInfoAPIView(APIView):
 
         # 해당 해충과 관리 정보를 시리얼라이저를 통해 응답함
         pest_serializer = PestSerializer(pest)
-        management_serializer = ManagementSerializer(management_info)
 
         # 해당 작물에 대한 농약 정보 가져오기
         crop_pesticides = CropPesticide.objects.filter(crop__cropName=selected_crop)
@@ -132,7 +131,6 @@ class PestInfoAPIView(APIView):
                 matching_pesticides.append(crop_pesticide)
 
         pest_info = pest_serializer.data
-        management = [management_serializer.data]
 
         unique_pesticides = set()
         pesticide_info = []
@@ -145,7 +143,7 @@ class PestInfoAPIView(APIView):
       
         response_data = {
             'pest': pest_info,
-            'management': management,
+            'management': management_info,
             'pesticide_info': pesticide_info,
         }
         return Response(response_data, status=status.HTTP_200_OK)
@@ -154,6 +152,6 @@ class PestInfoAPIView(APIView):
     def get_management_info(self, pest_name):
         management = get_object_or_404(Management, pest__pestName=pest_name)
 
-        serializer = ManagementSerializer(management)
-        return serializer.data
-    
+        management1 = management.management1
+        management_list = management1.split('/') if management1 else []
+        return management_list

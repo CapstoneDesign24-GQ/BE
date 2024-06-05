@@ -45,7 +45,7 @@ class UserSelectSerializer(serializers.ModelSerializer):
 class ManagementSerializer(serializers.ModelSerializer):
     class Meta:
         model = Management
-        fields = ['management1', 'management2']
+        fields = ['management1']
 
 class PesticideSerializer(serializers.ModelSerializer):
     class Meta:
@@ -64,3 +64,5 @@ class PesticideDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = CropPesticide
         fields = ['companyName', 'pesticideName', 'safeUsagePeriod', 'safeUsageFrequency']
+
+   
