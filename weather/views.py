@@ -113,6 +113,11 @@ def get_main_info(request):
         selected_location = latest_user_select.selectedLocation
         selected_date = latest_user_select.selectedDate
 
+        today_date = datetime.now().date()
+
+        # 날짜 형식 변환
+        date = DateFormat(today_date).format('Ymd')
+
         # 기상 데이터 가져오기
         weather_response = get_weather_data(request)
         if weather_response.status_code != 200:
@@ -161,7 +166,7 @@ def get_main_info(request):
         response_data = {
             'selected_crop': selected_crop,
             'selected_location': selected_location,
-            'selected_date': selected_date,
+            'selected_date': today_date,
             'percentages': percentage,
             'riskLevels': riskLevel
         }
@@ -191,12 +196,15 @@ def fetch_weather_data(url, params, retries=40, delay=1):
 
 @api_view(['GET'])
 def get_weather_data(request):
-    # 오늘 날짜 및 시간으로 설정
+    # 사용자 날짜 및 시간으로 설정
     latest_user_select = UserSelect.objects.latest('userSelectId')
     selected_date = latest_user_select.selectedDate
 
+    # 오늘 날짜 및 시간으로 설정 
+    today_date = datetime.now().date()
+
     # 날짜 형식 변환
-    date = DateFormat(selected_date).format('Ymd')
+    date = DateFormat(today_date).format('Ymd')
   
     # 기본 지역 설정
     location_name = '충청도'
