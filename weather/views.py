@@ -94,14 +94,25 @@ def process_weather_data(data):
 logger = logging.getLogger(__name__)
     
 def calculate_risk_level(percentage):
-    if percentage < 25:
+    '''if percentage < 25:
         return '괜찮'
     elif 25 <= percentage < 50:
         return '조심'
     elif 50 <= percentage < 75:
         return '주의'
     else:
-        return '위험'
+        return '위험'''
+    mean = 70.9191
+    std_dev = 24.367
+    
+    if percentage >= mean + std_dev:
+        return "위험"
+    elif mean <= percentage < mean + std_dev:
+        return "주의"
+    elif mean - std_dev <= percentage < mean:
+        return "조심"
+    else:
+        return "안전"
 
 def get_main_info(request):
     try:
@@ -126,17 +137,9 @@ def get_main_info(request):
         weather_data = weather_response.data
 
         # 예측 모델 로드
-        model_path = 'weather/resource/test3_model.pkl'
+        # model_path = 'weather/resource/test3_model.pkl'
+        model_path = 'weather/resource/xgb_optimized_f1.pkl'
         model = joblib.load(model_path)
-
-        # 예측을 위한 테스트 데이터 생성
-        '''test_data = [
-            {"category": "TMP", "fcstValue": 16},
-            {"category": "REH", "fcstValue": 100},
-            {"category": "VEC", "fcstValue": 323},
-            {"category": "WSD", "fcstValue": 1},
-            {"category": "PCP", "fcstValue": 0}
-        ]'''
 
         # processed_data = process_weather_data(weather_data)
         # processed_data_array = processed_data.to_numpy()

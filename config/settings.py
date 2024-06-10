@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-bqc8+7v5vfe75jf%#_1sh((#!8cyd6qqx*v_(*u^2r=ts03-s2
 # SECURITY WARNING: don't run with debug turned on in production!
 
 # pythonanywhere 서버 배포하려고 True -> False, ALLOWED_HOSTS 추가
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*', '.pythonanywhere.com']
 
@@ -170,13 +170,15 @@ CORS_ALLOW_HEADERS = (
     
 )
 # 허용할 프론트엔드의 도메인
-'''CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    'http://api.GQ.klr.kr',  
+CORS_ALLOWED_ORIGINS = [
+    # "http://localhost:3000",
+    'http://api.GQ.klr.kr', 
+    "https://hufs-gq.vercel.app",
 ]
 CSRF_TRUSTED_ORIGINS = [
     'http://api.GQ.klr.kr',
-    "http://localhost:3000",
+    # "http://localhost:3000",
+    "https://hufs-gq.vercel.app",
 ]
-'''
+
 # 같은 와이파이 쓸 때 실시간 데이터 확인 ifconfig -> en0 -> inet x.x.x.x
