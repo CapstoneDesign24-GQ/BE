@@ -137,8 +137,8 @@ def get_main_info(request):
         weather_data = weather_response.data
 
         # 예측 모델 로드
-        # model_path = 'weather/resource/test3_model.pkl'
-        model_path = 'weather/resource/xgb_optimized_f1.pkl'
+        model_path = 'weather/resource/test3_model.pkl' # 이전 모델
+        # model_path = 'weather/resource/xgb_optimized_f1.pkl'
         model = joblib.load(model_path)
 
         # processed_data = process_weather_data(weather_data)
